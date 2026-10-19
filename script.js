@@ -61,7 +61,7 @@ if (navigation) {
 
 const greeting = document.querySelector('#typed-greeting');
 if (greeting) {
-  const phrases = ['an equity investor', 'a business enthusiast', 'a derivative trader'];
+  const phrases = ['a Data scientist', 'an Analytical thinker', 'a Pioneer'];
   let phraseIndex = 0;
   let characterIndex = 0;
   let isDeleting = false;
@@ -96,7 +96,20 @@ const openModal = id => document.querySelector(id)?.classList.add('is-open');
 const closeAllModals = () => document.querySelectorAll('.modal').forEach(modal => modal.classList.remove('is-open'));
 document.querySelectorAll('.contact-trigger,.nav-contact').forEach(button => button.addEventListener('click', () => openModal('#contact-modal')));
 document.querySelector('.portrait-button')?.addEventListener('click', () => openModal('#photo-modal'));
-document.querySelector('.assistant-prompt')?.addEventListener('click', () => openModal('#contact-modal'));
+const assistantButton = document.querySelector('.assistant-prompt');
+const assistantMessage = document.querySelector('#assistant-message');
+if (assistantButton && assistantMessage) {
+  assistantButton.addEventListener('click', () => {
+    assistantMessage.hidden = !assistantMessage.hidden;
+    assistantButton.setAttribute('aria-expanded', String(!assistantMessage.hidden));
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      assistantMessage.hidden = true;
+      assistantButton.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
 document.querySelectorAll('.close-modal').forEach(button => button.addEventListener('click', closeAllModals));
 document.querySelectorAll('.modal').forEach(modal => modal.addEventListener('click', event => { if (event.target === modal) closeAllModals(); }));
 document.addEventListener('keydown', event => { if (event.key === 'Escape') closeAllModals(); });

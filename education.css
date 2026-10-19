@@ -1,0 +1,31 @@
+.education-page { width: min(1000px, 100%); margin: 0 auto; padding: clamp(80px, 12vh, 160px) 0 80px; }
+.education-page h1 { margin: 0 0 clamp(32px, 4vw, 60px); text-align: center; font-size: clamp(32px, 5vw, 48px); letter-spacing: -.02em; }
+.education-list { display: grid; gap: 24px; }
+.education-card { border: 1px solid var(--line); border-radius: 16px; background: var(--panel); box-shadow: 0 4px 20px rgb(0 0 0 / .04); overflow: hidden; transition: transform .25s, box-shadow .25s, border-color .25s; }
+.education-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 30px rgb(0 0 0 / .08); }
+.education-card summary { display: grid; grid-template-columns: 112px minmax(0, 1fr) auto 32px; gap: 20px; align-items: center; padding: 24px 28px; cursor: pointer; list-style: none; }
+.education-card summary::-webkit-details-marker { display: none; }
+.education-card summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; border-radius: 16px; }
+.university-logo { display: block; width: 112px; height: 62px; object-fit: contain; padding: 7px; border-radius: 8px; background: #fff; }
+.university-name { font-size: 20px; font-weight: 600; letter-spacing: -.025em; }
+.education-date { color: var(--muted); font-size: 14px; white-space: nowrap; }
+.education-toggle { display: grid; place-items: center; width: 32px; height: 32px; background: var(--ink); color: var(--bg); border-radius: 50%; font-size: 24px; line-height: 1; transition: transform .25s; }
+.education-card[open] .education-toggle { transform: rotate(45deg); }
+.education-content { padding: 0 28px 28px; color: var(--muted); line-height: 1.65; }
+.education-content h2 { margin: 12px 0 8px; color: var(--ink); font-size: 19px; font-weight: 600; }
+.education-content p { margin: 8px 0; }
+.education-location { font-size: 14px; }
+.education-content .education-gpa { color: var(--ink); font-weight: 600; }
+@media (max-width: 700px) {
+  .education-page { padding-top: 64px; }
+  .education-card summary { grid-template-columns: 90px minmax(0, 1fr) 28px; gap: 12px; padding: 20px; }
+  .university-logo { width: 90px; height: 58px; grid-row: span 2; }
+  .university-name { font-size: 17px; }
+  .education-date { grid-column: 2; font-size: 12px; }
+  .education-toggle { grid-column: 3; grid-row: 1 / span 2; width: 28px; height: 28px; }
+  .education-content { padding: 0 20px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .education-card, .education-toggle { transition: none; }
+  .education-card:hover { transform: none; }
+}

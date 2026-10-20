@@ -18,10 +18,15 @@
     <main class="certifications-page">
       <h1>Certifications</h1>
       <section class="certifications-carousel" aria-label="Professional certifications" aria-roledescription="carousel">
+        <div class="carousel-controls">
+          <button class="carousel-arrow" type="button" data-step="-1" aria-label="Previous certification"><span aria-hidden="true">←</span></button>
+          <div class="carousel-navigation" role="group" aria-label="Choose a certification"></div>
+          <button class="carousel-arrow" type="button" data-step="1" aria-label="Next certification"><span aria-hidden="true">→</span></button>
+        </div>
+        <p class="carousel-status" aria-live="polite" aria-atomic="true"></p>
         <div class="certifications-track" tabindex="0">
           <!-- Cards populated and managed by certifications.js -->
         </div>
-        <div class="carousel-navigation" aria-label="Carousel navigation"></div>
       </section>
     </main>
   </div>

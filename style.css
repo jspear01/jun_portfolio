@@ -89,6 +89,26 @@ html[data-theme="dark"] .eyebrow #typed-greeting { background-image: linear-grad
 .contact-card span { display: block; margin-top: 7px; color: var(--muted); }
 .footer { padding: 28px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
 
+.contact-page { width: min(500px, 100%); margin: auto; padding: 70px 0 80px; text-align: center; }
+.contact-page h1 { font-size: clamp(32px, 5vw, 48px); margin: 0 0 16px; letter-spacing: -.04em; }
+.contact-page > p { color: var(--muted); line-height: 1.7; margin: 0 0 32px; }
+.contact-dialog { width: min(500px, calc(100% - 36px)); max-height: calc(100dvh - 48px); padding: 32px; border: 1px solid var(--line); border-radius: 20px; background: var(--bg); color: var(--ink); box-shadow: 0 15px 40px rgb(0 0 0 / .2); }
+.contact-dialog::backdrop { background: rgb(0 0 0 / .5); backdrop-filter: blur(4px); }
+.contact-dialog[open] { animation: contact-appear .2s ease-out; }
+.contact-dialog h2 { margin: 6px 40px 26px 0; font-size: 24px; letter-spacing: -.03em; }
+.close-contact-dialog { position: absolute; right: 16px; top: 16px; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; color: var(--muted); background: var(--panel); font-size: 26px; cursor: pointer; }
+.contact-methods { display: grid; gap: 18px; }
+.contact-method-card { display: grid; justify-items: center; gap: 7px; padding: 24px 16px; border: 1px solid var(--line); border-radius: 15px; background: var(--panel); text-align: center; transition: transform .2s, border-color .2s, box-shadow .2s; }
+.contact-method-card svg { width: 29px; height: 29px; margin-bottom: 5px; color: #4a90e2; }
+.contact-method-card strong { font-size: 17px; font-weight: 500; }
+.contact-method-card span { color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
+.contact-method-card:hover { transform: translateY(-3px); border-color: var(--muted); box-shadow: 0 10px 20px rgb(0 0 0 / .08); }
+.contact-method-card:focus-visible, .close-contact-dialog:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+html:has(.contact-dialog[open]) { overflow: hidden; }
+@keyframes contact-appear { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
+@media (max-width: 480px) { .contact-dialog { padding: 24px 20px; } .contact-method-card { padding: 20px 14px; } }
+@media (prefers-reduced-motion: reduce) { .contact-dialog[open] { animation: none; } .contact-method-card { transition: none; } }
+
 .work-page { text-align: center; }
 .work-page .eyebrow { margin-bottom: 10px; }
 .work-timeline { position: relative; display: grid; justify-items: center; gap: 30px; width: min(560px, 100%); margin: 56px auto 0; }

@@ -42,8 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let startX = 0;
   let startY = 0;
   let isDragging = false;
-  let autoRotateInterval = null;
-  let isAutoRotating = true;
   const dragThreshold = 40;
 
   // Build Cards
@@ -74,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (currentIndex !== index) {
         currentIndex = index;
         updateCarousel();
-        restartAutoRotate();
       }
     });
 
@@ -89,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
       dot.addEventListener('click', () => {
         currentIndex = index;
         updateCarousel();
-        restartAutoRotate();
       });
       navContainer.appendChild(dot);
     }
@@ -115,37 +111,22 @@ document.addEventListener('DOMContentLoaded', () => {
       card.setAttribute('data-position', pos);
       card.setAttribute('aria-hidden', pos !== 'center' ? 'true' : 'false');
       card.setAttribute('tabindex', pos === 'center' ? '0' : '-1');
+      card.querySelector('.view-credential').tabIndex = pos === 'center' ? 0 : -1;
     });
 
     dots.forEach((dot, index) => {
       dot.classList.toggle('active', index === currentIndex);
+      dot.setAttribute('aria-current', index === currentIndex ? 'true' : 'false');
     });
+    document.querySelector('.carousel-status').textContent = `${currentIndex + 1} of ${cards.length}`;
   }
 
-  function startAutoRotate() {
-    stopAutoRotate();
-    autoRotateInterval = setInterval(() => {
-      if (!isDragging && isAutoRotating) {
-        currentIndex = (currentIndex + 1) % certificationsData.length;
-        updateCarousel();
-      }
-    }, 3500);
-  }
-
-  function stopAutoRotate() {
-    if (autoRotateInterval) {
-      clearInterval(autoRotateInterval);
-      autoRotateInterval = null;
-    }
-  }
-
-  function restartAutoRotate() {
-    stopAutoRotate();
-    setTimeout(() => {
-      isAutoRotating = true;
-      startAutoRotate();
-    }, 2000);
-  }
+  document.querySelectorAll('.carousel-arrow').forEach(button => {
+    button.addEventListener('click', () => {
+      currentIndex = (currentIndex + Number(button.dataset.step) + cards.length) % cards.length;
+      updateCarousel();
+    });
+  });
 
   // Pointer / Touch Handlers
   function onDragStart(e) {
@@ -153,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
     isDragging = true;
     startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
     startY = e.type.includes('mouse') ? e.pageY : e.touches[0].pageY;
-    stopAutoRotate();
   }
 
   function onDragEnd(e) {
@@ -171,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     isDragging = false;
-    restartAutoRotate();
   }
 
   track.addEventListener('mousedown', onDragStart);
@@ -185,36 +164,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowLeft') {
       currentIndex = (currentIndex - 1 + certificationsData.length) % certificationsData.length;
       updateCarousel();
-      restartAutoRotate();
     } else if (e.key === 'ArrowRight') {
       currentIndex = (currentIndex + 1) % certificationsData.length;
       updateCarousel();
-      restartAutoRotate();
     } else if (e.key === 'Home') {
       currentIndex = 0;
       updateCarousel();
-      restartAutoRotate();
     } else if (e.key === 'End') {
       currentIndex = certificationsData.length - 1;
       updateCarousel();
-      restartAutoRotate();
-    }
-  });
-
-  // Pause on hover
-  track.addEventListener('mouseenter', () => stopAutoRotate());
-  track.addEventListener('mouseleave', () => startAutoRotate());
-
-  // Visibility change
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      stopAutoRotate();
-    } else {
-      startAutoRotate();
     }
   });
 
   // Initial update
   updateCarousel();
-  startAutoRotate();
 });

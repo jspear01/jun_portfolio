@@ -1,1 +1,66 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Projects | Jun Song</title><link rel="stylesheet" href="style.css"></head><body><div class="shell"><header class="site-header"><a class="brand" href="index.html">Jun Song</a><nav class="nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="work.html">Work</a><a href="education.html">Education</a><a href="certifications.html">Certifications</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a></nav></header><main class="page"><h1 class="page-title">My Projects</h1><section class="grid"><article class="card"><p class="tag">Generative AI</p><h2>Grounded Knowledge Assistant</h2><p>RAG and LLM techniques that help product managers get trustworthy answers from internal information.</p></article><article class="card"><p class="tag">Interactive analytics</p><h2>Metro Atlanta Real Estate Price Tracker</h2><p>Explore Metro Atlanta real estate prices in this interactive Streamlit app.</p><p><a href="https://metro-atlanta-house-tracker.streamlit.app/" target="_blank" rel="noopener noreferrer">Open tracker ↗</a></p></article><article class="card"><p class="tag">Machine learning</p><h2>Production ML Systems</h2><p>Predictive and NLP solutions built with rigorous validation, testing, tuning, and scalable data preparation.</p></article><article class="card"><p class="tag">Web application</p><h2>Hair Salon Management App</h2><p>A salon management app with client booking, a staff calendar, stylist profiles, and time-off management.</p><p><a href="hair-salon-demo.html">View demo →</a></p></article></section></main></div><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Projects | Jun Song</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="projects.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">Jun Song</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="work.html">Work</a><a href="education.html">Education</a><a href="certifications.html">Certifications</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a>
+      </nav>
+    </header>
+    <main class="projects-page">
+      <h1>My Projects</h1>
+      <div class="project-tabs" role="tablist" aria-label="Project categories">
+        <button class="project-tab is-active" type="button" role="tab" aria-selected="true" data-filter="all">All</button>
+        <button class="project-tab" type="button" role="tab" aria-selected="false" data-filter="analytics">Analytics &amp; AI</button>
+        <button class="project-tab" type="button" role="tab" aria-selected="false" data-filter="app">Applications</button>
+      </div>
+      <section class="project-grid" aria-live="polite">
+        <article class="project-card" data-category="analytics">
+          <div class="project-visual project-visual-rag" aria-hidden="true"><span>RAG</span><i></i><i></i><i></i></div>
+          <div class="project-copy">
+            <p class="project-type">Generative AI</p>
+            <h2>Grounded Knowledge Assistant</h2>
+            <p>RAG and LLM techniques that help product managers get trustworthy answers from internal information.</p>
+          </div>
+        </article>
+        <article class="project-card" data-category="analytics">
+          <div class="project-visual project-visual-atl" aria-hidden="true"><span>ATL</span><svg viewBox="0 0 220 90"><path d="M12 73 53 55l34 12 38-38 31 17 52-36" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="73" r="5"/><circle cx="53" cy="55" r="5"/><circle cx="87" cy="67" r="5"/><circle cx="125" cy="29" r="5"/><circle cx="156" cy="46" r="5"/><circle cx="208" cy="10" r="5"/></svg></div>
+          <div class="project-copy">
+            <p class="project-type">Interactive analytics</p>
+            <h2>Metro Atlanta Real Estate Price Tracker</h2>
+            <p>Explore Metro Atlanta real estate prices in this interactive Streamlit app.</p>
+            <a class="project-link" href="https://metro-atlanta-house-tracker.streamlit.app/" target="_blank" rel="noopener noreferrer">Open tracker <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="project-card" data-category="analytics">
+          <div class="project-visual project-visual-ml" aria-hidden="true"><span>ML</span><div class="ml-grid"></div></div>
+          <div class="project-copy">
+            <p class="project-type">Machine learning</p>
+            <h2>Production ML Systems</h2>
+            <p>Predictive and NLP solutions built with rigorous validation, testing, tuning, and scalable data preparation.</p>
+          </div>
+        </article>
+        <article class="project-card" data-category="app">
+          <img class="project-image" src="assets/hair-salon-demo/03_staff_dashboard.png" alt="Hair Salon Management App staff dashboard" loading="lazy">
+          <div class="project-copy">
+            <p class="project-type">Web application</p>
+            <h2>Hair Salon Management App</h2>
+            <p>A salon management app with client booking, a staff calendar, stylist profiles, and time-off management.</p>
+            <a class="project-link" href="hair-salon-demo.html">View demo <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+  <script src="projects.js"></script>
+</body>
+</html>

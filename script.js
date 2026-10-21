@@ -101,15 +101,15 @@ const contactIcons = {
   phone: '<path d="M8 3H4a1 1 0 0 0-1 1c0 9 8 17 17 17a1 1 0 0 0 1-1v-4l-5-2-2 2a14 14 0 0 1-6-6l2-2-2-5Z"/>'
 };
 const contactMethods = [
-  { icon: 'email', title: 'Email', detail: 'junchangsong0@gmail.com', href: 'mailto:junchangsong0@gmail.com', newTab: true },
+  { icon: 'email', title: 'Email', detail: 'junchangsong0@gmail.com', copy: true },
   { icon: 'linkedin', title: 'LinkedIn', detail: 'Connect professionally', href: 'https://www.linkedin.com/in/junchangsong', newTab: true },
   { icon: 'phone', title: 'Phone', detail: '770-670-1138', href: 'tel:+17706701138' }
 ];
 const contactCards = contactMethods.map(method => `
-  <a class="contact-method-card" href="${method.href}" ${method.newTab ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+  <${method.copy ? 'button type="button" class="contact-method-card copy-email"' : `a class="contact-method-card" href="${method.href}" ${method.newTab ? 'target="_blank" rel="noopener noreferrer"' : ''}`}>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${contactIcons[method.icon]}</svg>
     <strong>${method.title}</strong><span>${method.detail}</span>
-  </a>`).join('');
+  </${method.copy ? 'button' : 'a'}>`).join('');
 document.querySelector('.contact-page-options')?.insertAdjacentHTML('beforeend', contactCards);
 const contactDialog = document.createElement('dialog');
 contactDialog.className = 'contact-dialog';
@@ -117,6 +117,35 @@ contactDialog.setAttribute('aria-labelledby', 'contact-dialog-title');
 contactDialog.innerHTML = `<button class="close-contact-dialog" type="button" aria-label="Close contact menu" autofocus>×</button>
   <h2 id="contact-dialog-title">Get in touch</h2><div class="contact-methods">${contactCards}</div>`;
 document.body.append(contactDialog);
+const copyNotice = document.createElement('p');
+copyNotice.className = 'copy-notice';
+copyNotice.setAttribute('role', 'status');
+copyNotice.setAttribute('aria-live', 'polite');
+copyNotice.hidden = true;
+document.body.append(copyNotice);
+let copyNoticeTimer;
+const copyEmail = async () => {
+  const email = 'junchangsong0@gmail.com';
+  try {
+    if (!navigator.clipboard) throw new Error('Clipboard API unavailable');
+    await navigator.clipboard.writeText(email);
+  } catch {
+    const copyField = document.createElement('textarea');
+    copyField.value = email;
+    copyField.setAttribute('readonly', '');
+    copyField.style.position = 'fixed';
+    copyField.style.opacity = '0';
+    document.body.append(copyField);
+    copyField.select();
+    document.execCommand('copy');
+    copyField.remove();
+  }
+  copyNotice.textContent = 'Email address copied.';
+  copyNotice.hidden = false;
+  clearTimeout(copyNoticeTimer);
+  copyNoticeTimer = window.setTimeout(() => { copyNotice.hidden = true; }, 2400);
+};
+document.querySelectorAll('.copy-email').forEach(button => button.addEventListener('click', copyEmail));
 document.querySelectorAll('.contact-trigger, .nav-contact, .nav a[href="contact.html"]').forEach(trigger => {
   trigger.setAttribute('aria-haspopup', 'dialog');
   trigger.addEventListener('click', event => {

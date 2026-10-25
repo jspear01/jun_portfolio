@@ -124,23 +124,36 @@ copyNotice.setAttribute('aria-live', 'polite');
 copyNotice.hidden = true;
 document.body.append(copyNotice);
 let copyNoticeTimer;
-const copyEmail = async () => {
+const copyEmail = async event => {
+  const button = event.currentTarget;
+  // Keep feedback in the same dialog/page as the activated email button.
+  button.insertAdjacentElement('afterend', copyNotice);
+  copyNotice.hidden = true;
+  clearTimeout(copyNoticeTimer);
   const email = 'junchangsong0@gmail.com';
+  let copied = false;
   try {
     if (!navigator.clipboard) throw new Error('Clipboard API unavailable');
     await navigator.clipboard.writeText(email);
+    copied = true;
   } catch {
     const copyField = document.createElement('textarea');
     copyField.value = email;
     copyField.setAttribute('readonly', '');
     copyField.style.position = 'fixed';
     copyField.style.opacity = '0';
-    document.body.append(copyField);
+    (button.closest('dialog') || document.body).append(copyField);
     copyField.select();
-    document.execCommand('copy');
-    copyField.remove();
+    try {
+      copied = document.execCommand('copy');
+    } catch {
+      copied = false;
+    } finally {
+      copyField.remove();
+      button.focus({ preventScroll: true });
+    }
   }
-  copyNotice.textContent = 'Email address copied.';
+  copyNotice.textContent = copied ? 'Email address copied.' : 'Unable to copy. Please copy junchangsong0@gmail.com manually.';
   copyNotice.hidden = false;
   clearTimeout(copyNoticeTimer);
   copyNoticeTimer = window.setTimeout(() => { copyNotice.hidden = true; }, 2400);
@@ -154,6 +167,10 @@ document.querySelectorAll('.contact-trigger, .nav-contact, .nav a[href="contact.
   });
 });
 contactDialog.querySelector('.close-contact-dialog').addEventListener('click', () => contactDialog.close());
+contactDialog.addEventListener('close', () => {
+  clearTimeout(copyNoticeTimer);
+  copyNotice.hidden = true;
+});
 contactDialog.addEventListener('click', event => {
   const bounds = contactDialog.getBoundingClientRect();
   if (event.target === contactDialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) contactDialog.close();

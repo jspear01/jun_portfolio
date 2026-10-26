@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Jun Song | Data Scientist</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chat.css">
   </head>
   <body>
     <div class="shell">
@@ -66,8 +67,19 @@
       </div>
     </div>
 
-    <div class="assistant-message" id="assistant-message" role="status" hidden>Jun's assistant is taking a break at the moment</div>
-    <button class="assistant-prompt" type="button" aria-controls="assistant-message" aria-expanded="false"><span>✨</span><span>Explore Jun’s<br>portfolio</span></button>
+    <button class="assistant-prompt" type="button" aria-haspopup="dialog" aria-controls="jun-chat"><span>✨</span><span>Ask about Jun</span></button>
+    <dialog id="jun-chat" aria-labelledby="chat-title">
+      <header class="chat-heading"><div><h2 id="chat-title">Jun’s assistant</h2><p>Get to know the person behind the portfolio.</p></div><button id="chat-close" type="button" aria-label="Close chat">×</button></header>
+      <div id="chat-messages" role="log" aria-live="polite" aria-label="Chat messages"></div>
+      <div id="chat-topics" aria-label="Suggested questions"></div>
+      <form id="chat-form"><label for="chat-question">Your question</label><div class="chat-input-row"><input id="chat-question" maxlength="600" required placeholder="What does Jun work on?" autocomplete="off"><button type="submit">Send</button></div></form>
+      <label class="chat-consent"><input id="chat-ai" type="checkbox"> Use AI when a saved answer doesn’t match</label>
+      <p class="chat-privacy">AI questions are sent to Cloudflare and Groq. Don’t include sensitive information. AI can make mistakes. Chat history stays in this tab and is not sent with your next question.</p>
+      <p id="chat-status" role="status"></p>
+    </dialog>
     <script src="script.js"></script>
+    <script src="chat-config.js"></script>
+    <script src="chat-knowledge.js"></script>
+    <script src="chat.js"></script>
   </body>
 </html>

@@ -1,0 +1,18 @@
+#jun-chat { width: min(460px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); padding: 22px; border: 1px solid var(--line); border-radius: 20px; color: var(--ink); background: var(--bg); box-shadow: 0 20px 80px #0004; }
+#jun-chat::backdrop { background: #0006; backdrop-filter: blur(3px); }
+.chat-heading { display: flex; gap: 12px; align-items: start; justify-content: space-between; }
+.chat-heading h2 { margin: 0; font-size: 1.35rem; }
+.chat-heading p, .chat-privacy, #chat-status { color: var(--muted); font-size: .78rem; line-height: 1.5; }
+#jun-chat button, #jun-chat input { font: inherit; }
+#jun-chat button { cursor: pointer; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); padding: 8px 12px; }
+#jun-chat button:disabled { opacity: .5; cursor: wait; }
+#jun-chat :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+#chat-messages { height: min(300px, 35dvh); overflow-y: auto; margin: 12px 0; }
+.chat-message { padding: 12px; background: var(--panel); border-radius: 12px; font-size: .9rem; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+.chat-user { border-left: 3px solid var(--accent); }
+#chat-topics { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+#chat-topics button { font-size: .78rem; }
+#chat-form label { font-size: .85rem; }
+.chat-input-row { display: flex; gap: 8px; margin: 6px 0 12px; }
+#chat-question { min-width: 0; flex: 1; padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); }
+.chat-consent { display: flex; align-items: center; gap: 8px; font-size: .8rem; }

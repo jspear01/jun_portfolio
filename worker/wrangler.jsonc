@@ -4,7 +4,7 @@
   "compatibility_date": "2026-10-25",
   "vars": {
     "ALLOWED_ORIGINS": "https://jspear01.github.io",
-    "GROQ_MODEL": "llama-3.1-8b-instant"
+    "GROQ_MODEL": "openai/gpt-oss-20b"
   },
   "ratelimits": [{ "name": "CHAT_LIMITER", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } }],
   "observability": { "enabled": false }
